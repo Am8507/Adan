@@ -1,105 +1,670 @@
 <!doctype html>
 <html lang="en" class="h-full">
-<head>
+ <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vintage Love Letters</title>
-
-  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- GOOGLE FONTS (these are remote, that’s fine) -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=UnifrakturMaguntia&family=Lovers+Quarrel&family=Mrs+Saint+Delafield&family=Pinyon+Script&family=Alex+Brush&family=Tangerine:wght@400;700&family=Italiana&display=swap" rel="stylesheet">
-
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&amp;family=UnifrakturMaguntia&amp;family=Lovers+Quarrel&amp;family=Mrs+Saint+Delafield&amp;family=Pinyon+Script&amp;family=Alex+Brush&amp;family=Tangerine:wght@400;700&amp;family=Italiana&amp;display=swap" rel="stylesheet">
   <style>
-    body, * {
+    body {
       box-sizing: border-box;
     }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
     .page {
       display: none;
     }
+    
     .page.active {
       display: flex;
     }
-
-    /* (Paste all your original CSS here EXACTLY — I include the styles further down for brevity) */
     
-    /* vintage background, paper sheet, envelope, wax seal, etc. */
+    /* Rich Victorian damask background */
     .vintage-background {
-      background: radial-gradient(ellipse at 20% 30%, rgba(80,50,40,0.4) 0%, transparent 60%),
-                  radial-gradient(ellipse at 80% 70%, rgba(60,40,30,0.3) 0%, transparent 60%),
-                  repeating-radial-gradient(circle at 30% 40%, transparent 0px, transparent 15px, rgba(40, 20, 15, 0.03) 15px, rgba(40, 20, 15, 0.03) 30px),
-                  linear-gradient(135deg, #2d1810 0%, #3f241a 25%, #2a1510 50%, #4a2f20 75%, #2d1810 100%);
+      background: 
+        radial-gradient(ellipse at 20% 30%, rgba(80, 50, 40, 0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(60, 40, 30, 0.3) 0%, transparent 60%),
+        repeating-radial-gradient(circle at 30% 40%, transparent 0px, transparent 15px, rgba(40, 20, 15, 0.03) 15px, rgba(40, 20, 15, 0.03) 30px),
+        linear-gradient(135deg, #2d1810 0%, #3f241a 25%, #2a1510 50%, #4a2f20 75%, #2d1810 100%);
       position: relative;
     }
-    /* (THE REST OF YOUR CSS GOES HERE — unchanged) */
+    
+    /* Ornate damask pattern overlay */
+    .vintage-background::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(45deg, transparent 0px, transparent 40px, rgba(80, 50, 30, 0.08) 40px, rgba(80, 50, 30, 0.08) 80px),
+        repeating-linear-gradient(-45deg, transparent 0px, transparent 40px, rgba(60, 40, 25, 0.06) 40px, rgba(60, 40, 25, 0.06) 80px);
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    
+    /* Subtle brocade texture */
+    .vintage-background::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 25% 35%, rgba(100, 70, 50, 0.05) 2px, transparent 2px),
+        radial-gradient(circle at 75% 65%, rgba(90, 60, 40, 0.04) 2px, transparent 2px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    
+    /* Elaborate Victorian parchment with gilded edges */
+    .paper-sheet {
+      background: 
+        radial-gradient(circle at 18% 22%, rgba(255, 250, 240, 0.5) 0%, transparent 45%),
+        radial-gradient(circle at 82% 78%, rgba(230, 210, 180, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(240, 225, 200, 0.3) 0%, transparent 65%),
+        repeating-linear-gradient(0deg, transparent 0px, rgba(210, 190, 160, 0.02) 0.5px, transparent 1px),
+        linear-gradient(145deg, #faf7f0 0%, #f5f0e5 20%, #ebe3d3 40%, #e6ddc8 60%, #e0d5bd 80%, #ddd0b5 100%);
+      padding: 3.5rem 3rem;
+      border-radius: 3px;
+      border: 18px solid rgba(61, 40, 23, 0.85);
+      box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.4),
+        inset 0 0 80px rgba(255, 250, 240, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.4),
+        inset 0 0 0 1px rgba(200, 170, 130, 0.3);
+      position: relative;
+    }
+    
+    /* Elaborate foxing, age spots, and water stains */
+    .paper-sheet::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 10% 15%, rgba(170, 130, 90, 0.15) 0%, transparent 18%),
+        radial-gradient(ellipse at 90% 20%, rgba(160, 125, 85, 0.12) 0%, transparent 20%),
+        radial-gradient(circle at 15% 80%, rgba(175, 135, 95, 0.14) 0%, transparent 15%),
+        radial-gradient(circle at 85% 85%, rgba(165, 125, 90, 0.16) 0%, transparent 18%),
+        radial-gradient(circle at 12% 35%, rgba(180, 140, 100, 0.10) 5px, transparent 5px),
+        radial-gradient(circle at 88% 45%, rgba(170, 135, 95, 0.08) 8px, transparent 8px),
+        radial-gradient(circle at 25% 68%, rgba(175, 140, 105, 0.09) 4px, transparent 4px),
+        radial-gradient(circle at 75% 72%, rgba(165, 130, 95, 0.11) 6px, transparent 6px);
+      pointer-events: none;
+      border-radius: 3px;
+    }
+    
+    /* Paper fiber texture */
+    .paper-sheet::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(48deg, transparent, transparent 1.5px, rgba(200, 180, 150, 0.015) 1.5px, rgba(200, 180, 150, 0.015) 3px),
+        repeating-linear-gradient(-48deg, transparent, transparent 2px, rgba(190, 170, 140, 0.012) 2px, rgba(190, 170, 140, 0.012) 4px);
+      pointer-events: none;
+      mix-blend-mode: multiply;
+      opacity: 0.6;
+      border-radius: 3px;
+    }
+    
+    .paper-sheet > * {
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Envelope styling */
+    .letter-envelope {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.4));
+    }
+    
+    .envelope-back {
+      background: linear-gradient(145deg, #ede3d3 0%, #e3d9c8 25%, #d9cebb 50%, #d0c3af 75%, #c7b8a5 100%);
+      border-radius: 4px;
+      border: 3px solid rgba(140, 115, 85, 0.4);
+      position: relative;
+      padding: 0;
+      min-height: 280px;
+      box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.35),
+        inset 0 0 40px rgba(255, 250, 240, 0.35);
+    }
+    
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 170px solid transparent;
+      border-right: 170px solid transparent;
+      border-top: 110px solid #d5c7b5;
+      z-index: 10;
+      transform-origin: top center;
+      transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.25));
+    }
+    
+    /* Ornate wax seal with baroque details */
+    .wax-seal {
+      position: absolute;
+      top: 105px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: 
+        radial-gradient(circle at 30% 30%, #d85555 0%, #c04545 18%, #a83535 40%, #8f2525 65%, #751818 85%, #5a1010 100%);
+      z-index: 11;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 6px solid #2a0505;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.65),
+        inset 0 5px 10px rgba(0, 0, 0, 0.75),
+        inset 0 -4px 8px rgba(255, 130, 130, 0.18);
+      position: relative;
+    }
+    
+    /* Decorative seal rings */
+    .wax-seal::before {
+      content: '';
+      position: absolute;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 3.5px solid rgba(25, 5, 5, 0.75);
+      box-shadow: 
+        inset 0 0 12px rgba(0, 0, 0, 0.55),
+        0 0 0 1.5px rgba(230, 110, 110, 0.12);
+    }
+    
+    .wax-seal::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2.5px solid rgba(18, 3, 3, 0.65);
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.45);
+    }
+    
+    .wax-seal:hover {
+      transform: translateX(-50%) scale(1.1);
+      box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.7),
+        inset 0 4px 8px rgba(0, 0, 0, 0.7),
+        inset 0 -3px 6px rgba(255, 120, 120, 0.2);
+    }
+    
+    /* Embossed baroque seal text */
+    .seal-text {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.7rem;
+      font-weight: 900;
+      color: #1a0303;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      text-align: center;
+      line-height: 1.1;
+      user-select: none;
+      position: relative;
+      z-index: 3;
+      text-shadow: 
+        0 2px 0 rgba(255, 140, 140, 0.15),
+        0 -2px 3px rgba(0, 0, 0, 0.9),
+        1px 0 2px rgba(0, 0, 0, 0.6),
+        -1px 0 2px rgba(255, 100, 100, 0.1);
+      transform: rotate(-3deg);
+    }
+    
+    .envelope-interior {
+      padding: 120px 1.75rem 1.75rem 1.75rem;
+      min-height: 260px;
+      position: relative;
+    }
+    
+    /* Antique letter paper with decorative border */
+    .letter-paper {
+      background: 
+        linear-gradient(90deg, rgba(160, 130, 100, 0.12) 0%, transparent 8px, transparent calc(100% - 8px), rgba(160, 130, 100, 0.12) 100%),
+        linear-gradient(180deg, rgba(160, 130, 100, 0.12) 0%, transparent 8px, transparent calc(100% - 8px), rgba(160, 130, 100, 0.12) 100%),
+        radial-gradient(circle at 18% 25%, rgba(255, 252, 245, 0.5) 0%, transparent 45%),
+        radial-gradient(circle at 82% 75%, rgba(245, 235, 215, 0.4) 0%, transparent 50%),
+        linear-gradient(145deg, #fdfbf7 0%, #f9f5ed 30%, #f3ede3 60%, #efe7d9 100%);
+      padding: 2rem 1.75rem;
+      min-height: 140px;
+      position: relative;
+      box-shadow: 
+        inset 0 0 30px rgba(200, 180, 150, 0.2),
+        inset 0 0 0 1px rgba(180, 150, 120, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.15);
+      border: 2px solid rgba(160, 130, 100, 0.25);
+      border-radius: 3px;
+    }
+    
+    /* Ornate corner embellishments */
+    .letter-paper::before {
+      content: '✦';
+      position: absolute;
+      top: 0.6rem;
+      left: 0.6rem;
+      font-size: 0.75rem;
+      color: rgba(140, 110, 80, 0.3);
+      font-family: 'Cinzel Decorative', serif;
+    }
+    
+    /* Decorative vintage stains */
+    .letter-paper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 14% 18%, rgba(185, 155, 125, 0.08) 0%, transparent 22%),
+        radial-gradient(ellipse at 88% 82%, rgba(180, 150, 120, 0.07) 0%, transparent 20%),
+        radial-gradient(circle at 12% 75%, rgba(175, 145, 115, 0.06) 4px, transparent 4px);
+      pointer-events: none;
+      border-radius: 3px;
+    }
+    
+    .letter-paper > * {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .letter-envelope.sealed .envelope-interior {
+      pointer-events: none;
+    }
+    
+    .letter-envelope.sealed .envelope-back {
+      cursor: pointer;
+    }
+    
+    .letter-envelope.unsealed .envelope-flap {
+      transform: translateX(-50%) rotateX(180deg);
+      opacity: 0;
+    }
+    
+    .letter-envelope.unsealed .wax-seal {
+      animation: sealShatter 0.8s ease forwards;
+    }
+    
+    @keyframes sealShatter {
+      0% {
+        transform: translateX(-50%) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-50%) scale(0) rotate(30deg);
+        opacity: 0;
+      }
+    }
+    
+    .letter-content {
+      display: none;
+    }
+    
+    .letter-envelope.unsealed .letter-content {
+      display: block;
+      animation: gracefulReveal 0.7s ease 0.5s both;
+    }
+    
+    @keyframes gracefulReveal {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Button styling */
+    .vintage-button {
+      background: linear-gradient(180deg, #6b4423 0%, #5e3a1d 30%, #553318 60%, #4a2810 100%);
+      color: #f7efe3;
+      padding: 1.1rem 3.5rem;
+      border: 3px solid rgba(120, 90, 50, 0.7);
+      font-family: 'Playfair Display', serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 6px 18px rgba(0, 0, 0, 0.5),
+        inset 0 2px 1px rgba(255, 230, 190, 0.25);
+      border-radius: 2px;
+    }
+    
+    .vintage-button:hover {
+      background: linear-gradient(180deg, #7d5530 0%, #6e4725 30%, #62401f 60%, #553518 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.6);
+    }
+    
+    .vintage-button:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    @media (max-width: 640px) {
+      .paper-sheet {
+        padding: 2.5rem 2rem;
+      }
+      
+      .envelope-flap {
+        border-left: 160px solid transparent;
+        border-right: 160px solid transparent;
+        border-top: 105px solid #d5c7b5;
+      }
+      
+      .wax-seal {
+        top: 92px;
+        width: 75px;
+        height: 75px;
+      }
+      
+      .envelope-interior {
+        padding: 115px 1.5rem 1.5rem 1.5rem;
+      }
+      
+      .vintage-button {
+        padding: 0.95rem 2.5rem;
+        font-size: 0.65rem;
+      }
+    }
   </style>
-</head>
-
-<body class="h-full">
-  <div id="app" class="h-full w-full overflow-auto vintage-background" style="padding:60px 20px;">
-
-    <!-- Welcome Page -->
-    <div id="welcome-page" class="page active h-full items-center justify-center">
-      <div class="paper-sheet w-full max-w-2xl text-center">
-        <h1 id="main-title" class="text-6xl font-serif text-[#180c05] mb-4">Letters of Devotion</h1>
-        <p id="subtitle" class="text-2xl italiana text-[#5a3f2a] mb-8">For my beloved</p>
-        <p id="welcome-description" class="text-lg text-[#3d2817] mb-10">Adan Abid, love of my life, I wrote this for you. I hope you find it worthy of the love I hold for you.</p>
-        <button class="vintage-button" onclick="viewLetters()">View the Letters</button>
-      </div>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full overflow-auto vintage-background" style="padding: 60px 20px;"><!-- Welcome Page -->
+   <div id="welcome-page" class="page active h-full items-center justify-center">
+    <div class="paper-sheet w-full max-w-2xl text-center">
+     <h1 id="main-title" style="font-family: 'Pinyon Script', cursive; font-size: 4.5rem; color: #180c05; margin-bottom: 1rem; text-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 1px 2px rgba(255,255,255,0.3);">Letters of Devotion</h1>
+     <p id="subtitle" style="font-family: 'Italiana', serif; font-size: 1.5rem; color: #5a3f2a; font-style: italic; margin-bottom: 2rem; letter-spacing: 0.15em;">For my beloved</p>
+     <div style="margin: 2rem 0; display: flex; align-items: center; justify-content: center;">
+      <div style="flex: 1; height: 2px; background: linear-gradient(to right, transparent, rgba(100, 70, 50, 0.5) 50%, transparent);"></div><span style="padding: 0 2rem; font-size: 2rem; color: rgba(100, 70, 50, 0.6);">❧</span>
+      <div style="flex: 1; height: 2px; background: linear-gradient(to left, transparent, rgba(100, 70, 50, 0.5) 50%, transparent);"></div>
+     </div>
+     <p id="welcome-description" style="font-family: 'Italiana', serif; font-size: 1.1rem; color: #3d2817; line-height: 1.8; margin-bottom: 2.5rem;">Three sealed letters await, each bearing words penned from the heart. Break the wax seals to reveal what has been written for you alone.</p><button class="vintage-button" onclick="viewLetters()" id="view-button"> View the Letters </button>
     </div>
-
-    <!-- Letters Page -->
-    <div id="letters-page" class="page items-start justify-start py-12">
-      <div class="w-full max-w-6xl mx-auto text-center">
-        <h2 id="letters-page-title" class="text-4xl text-[#2a1810] mb-10">Three Letters from My Heart</h2>
-        <!-- three sealed letters -->
-        <div class="grid gap-12 lg:grid-cols-3">
-          <!-- Letter blocks omitted here for brevity — reuse your original HTML -->
+   </div><!-- Letters Page -->
+   <div id="letters-page" class="page items-start justify-start" style="padding-top: 3rem;">
+    <div class="w-full max-w-6xl mx-auto">
+     <div class="text-center mb-16">
+      <p style="font-family: 'Italiana', serif; font-size: 1.5rem; color: #5a3f2a; font-style: italic; margin-bottom: 0.5rem;">To <span id="letters-beloved">My Dearest</span>,</p>
+      <h2 id="letters-page-title" style="font-family: 'Pinyon Script', cursive; font-size: 3rem; color: #2a1810; font-weight: 400;">Three Letters from My Heart</h2>
+     </div>
+     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 mb-16"><!-- Letter 1 -->
+      <div class="letter-envelope sealed" id="letter1">
+       <div class="envelope-back" onclick="breakSeal('letter1')">
+        <div class="envelope-flap"></div>
+        <div class="wax-seal"><span class="seal-text" id="seal1-text">AMOR</span>
         </div>
-
-        <button class="vintage-button mt-10" onclick="showFinal()">Continue to Final Message</button>
-      </div>
-    </div>
-
-    <!-- Final Page -->
-    <div id="final-page" class="page h-full items-center justify-center">
-      <div class="paper-sheet w-full max-w-2xl text-center">
-        <h2 id="final-question" class="text-5xl text-[#2a1810] mb-8">Will you be my Valentine?</h2>
-        <div class="flex justify-center gap-6 mb-8">
-          <button class="vintage-button" onclick="answerYes()">Yes 💕</button>
-          <button class="vintage-button bg-gray-800" onclick="answerNo()">No</button>
+        <div class="envelope-interior">
+         <div class="text-center mb-4">
+          <svg class="mx-auto mb-3" width="50" height="50" viewbox="0 0 50 50"><circle cx="25" cy="25" r="22" fill="none" stroke="#7a6860" stroke-width="1" opacity="0.3" /> <text x="25" y="32" text-anchor="middle" font-family="Playfair Display" font-size="20" font-weight="600" fill="#40302a">
+            I
+           </text>
+          </svg>
+          <p id="letter1-label" style="font-family: 'Italiana', serif; font-size: 0.875rem; color: #9a8070; text-transform: uppercase; letter-spacing: 3px;">First Letter</p>
+         </div>
+         <div class="letter-paper">
+          <div class="letter-content">
+           <p id="letter1-content" style="font-family: 'Alex Brush', cursive; font-weight: 400; font-size: 1.3rem; color: #3d2817; line-height: 1.9;">From the moment I first beheld you, my world was forever changed. You are the light that guides me through darkness, the melody that fills my days with joy. In your presence, I have found a home for my restless heart.</p>
+          </div>
+         </div>
         </div>
-        <p id="answer-text" class="text-2xl text-[#5a3f2a] opacity-0 transition-opacity duration-500 mb-8"></p>
-        <button class="vintage-button" onclick="returnHome()">← Return to Beginning</button>
+       </div>
+      </div><!-- Letter 2 -->
+      <div class="letter-envelope sealed" id="letter2">
+       <div class="envelope-back" onclick="breakSeal('letter2')">
+        <div class="envelope-flap"></div>
+        <div class="wax-seal"><span class="seal-text" id="seal2-text">VITA</span>
+        </div>
+        <div class="envelope-interior">
+         <div class="text-center mb-4">
+          <svg class="mx-auto mb-3" width="50" height="50" viewbox="0 0 50 50"><circle cx="25" cy="25" r="22" fill="none" stroke="#7a6860" stroke-width="1" opacity="0.3" /> <text x="25" y="32" text-anchor="middle" font-family="Playfair Display" font-size="20" font-weight="600" fill="#40302a">
+            II
+           </text>
+          </svg>
+          <p id="letter2-label" style="font-family: 'Italiana', serif; font-size: 0.875rem; color: #9a8070; text-transform: uppercase; letter-spacing: 3px;">Second Letter</p>
+         </div>
+         <div class="letter-paper">
+          <div class="letter-content">
+           <p id="letter2-content" style="font-family: 'Alex Brush', cursive; font-weight: 400; font-size: 1.3rem; color: #3d2817; line-height: 1.9;">Every breath I take whispers your name. You are woven into the very fabric of my being, as essential as air, as constant as the stars above. With you, I have discovered depths of feeling I never knew existed.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Letter 3 -->
+      <div class="letter-envelope sealed" id="letter3">
+       <div class="envelope-back" onclick="breakSeal('letter3')">
+        <div class="envelope-flap"></div>
+        <div class="wax-seal"><span class="seal-text" id="seal3-text">COR</span>
+        </div>
+        <div class="envelope-interior">
+         <div class="text-center mb-4">
+          <svg class="mx-auto mb-3" width="50" height="50" viewbox="0 0 50 50"><circle cx="25" cy="25" r="22" fill="none" stroke="#7a6860" stroke-width="1" opacity="0.3" /> <text x="25" y="32" text-anchor="middle" font-family="Playfair Display" font-size="18" font-weight="600" fill="#40302a">
+            III
+           </text>
+          </svg>
+          <p id="letter3-label" style="font-family: 'Italiana', serif; font-size: 0.875rem; color: #9a8070; text-transform: uppercase; letter-spacing: 3px;">Third Letter</p>
+         </div>
+         <div class="letter-paper">
+          <div class="letter-content">
+           <p id="letter3-content" style="font-family: 'Alex Brush', cursive; font-weight: 400; font-size: 1.3rem; color: #3d2817; line-height: 1.9;">My promise to you is eternal. Through all seasons, across all distances, my devotion remains unwavering. You are my past, present, and future—the keeper of my heart, now and forevermore.</p>
+          </div>
+         </div>
+        </div>
+       </div>
       </div>
+     </div>
+     <div class="text-center"><button class="vintage-button" onclick="showFinal()" id="continue-button"> Continue to Final Message </button>
+     </div>
     </div>
-
+   </div><!-- Final Page -->
+   <div id="final-page" class="page h-full items-center justify-center">
+    <div class="paper-sheet w-full max-w-2xl text-center">
+     <p style="font-family: 'Italiana', serif; font-size: 2rem; color: #5a3f2a; font-style: italic; margin-bottom: 2rem;"><span id="final-greeting">My Dearest</span> <span id="final-beloved">Love</span>,</p>
+     <h2 id="final-question" style="font-family: 'Pinyon Script', cursive; font-size: 3.5rem; color: #2a1810; font-weight: 400; font-style: normal; margin-bottom: 3rem; line-height: 1.3;">Will you be my Valentine?</h2>
+     <div style="display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 3rem;"><button class="vintage-button" onclick="answerYes()" id="yes-button"> Yes! 💕 </button> <button class="vintage-button" style="background: linear-gradient(180deg, #4a4a4a 0%, #3a3a3a 50%, #2a2a2a 100%);" onclick="answerNo()" id="no-button"> No </button>
+     </div>
+     <div style="min-height: 4rem; display: flex; align-items: center; justify-content: center;">
+      <p id="answer-text" style="font-family: 'Italiana', serif; font-size: 2rem; color: #5a3f2a; font-style: italic; opacity: 0; transition: opacity 0.5s;"></p>
+     </div>
+     <p id="closing-text" style="font-family: 'Italiana', serif; font-size: 1.25rem; color: #5a3f2a; margin-bottom: 0.75rem;">With all my heart,</p>
+     <p id="final-signature" style="font-family: 'Pinyon Script', cursive; font-size: 4rem; color: #2a1810; font-style: normal;">Eternally Yours</p>
+     <div style="margin-top: 4rem;"><button class="vintage-button" onclick="returnHome()" id="return-button"> ← Return to Beginning </button>
+     </div>
+    </div>
+   </div>
   </div>
-
-  <!-- SCRIPT SECTION -->
   <script>
-    let currentPage = "welcome-page";
+    const defaultConfig = {
+  beloved_name: 'My Dearest',
+  sender_name: 'Eternally Yours',
+
+  main_title: 'Letters of Devotion',
+  subtitle: 'For my beloved',
+
+  welcome_description: 'Adan Abid, love of my life, I wrote this for you. I hope you find it worthy of the love I hold for you.',
+
+  view_button_text: 'View the Letters',
+
+  letters_page_title: 'Three Letters from My Heart',
+
+  seal1_text: 'A.M',
+  letter1_label: 'First Letter',
+  letter1_content: 'I have loved you from the day I met you, and from that day till today, my love for you has only grown—each day deeper than the day before.',
+
+  seal2_text: 'A.M',
+  letter2_label: 'Second Letter',
+  letter2_content: 'I want you to know that I love you from the depths of my heart.',
+
+  seal3_text: 'A.M',
+  letter3_label: 'Third Letter',
+  letter3_content: 'You are the best thing that has ever happened to me, and I want you to stay with me till the day I leave this world.',
+
+  continue_button_text: 'Continue to Final Message',
+
+  final_greeting: 'My Dearest',
+  final_question: 'Will you be my Valentine?',
+
+  yes_button_text: 'Yes! 💕',
+  no_button_text: 'No',
+
+  yes_response: 'I will always love you 💝',
+  no_response: 'Perhaps another time, my dear... 💔',
+
+  closing_text: 'With all my heart,',
+  return_button_text: '← Return to Beginning'
+};
+
+
+    let currentPage = 'welcome-page';
+
     function showPage(pageId) {
-      document.getElementById(currentPage).classList.remove("active");
+      document.getElementById(currentPage).classList.remove('active');
       currentPage = pageId;
-      document.getElementById(pageId).classList.add("active");
+      document.getElementById(currentPage).classList.add('active');
+      document.getElementById('app').scrollTop = 0;
     }
-    function viewLetters(){ showPage("letters-page"); }
-    function showFinal(){ showPage("final-page"); }
-    function returnHome(){ showPage("welcome-page"); }
 
-    function answerYes(){
-      const el = document.getElementById("answer-text");
-      el.textContent = "I will always love you 💝";
-      el.style.opacity = "1";
+    function viewLetters() {
+      showPage('letters-page');
     }
-    function answerNo(){
-      const el = document.getElementById("answer-text");
-      el.textContent = "Perhaps another time... 💔";
-      el.style.opacity = "1";
+
+    function breakSeal(letterId) {
+      const envelope = document.getElementById(letterId);
+      if (envelope.classList.contains('sealed')) {
+        envelope.classList.remove('sealed');
+        envelope.classList.add('unsealed');
+      }
     }
+
+    function showFinal() {
+      showPage('final-page');
+    }
+
+    function returnHome() {
+      ['letter1', 'letter2', 'letter3'].forEach(id => {
+        const env = document.getElementById(id);
+        env.classList.remove('unsealed');
+        env.classList.add('sealed');
+      });
+      const answerText = document.getElementById('answer-text');
+      answerText.style.opacity = '0';
+      answerText.textContent = '';
+      showPage('welcome-page');
+    }
+
+    function answerYes() {
+      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+      const answerText = document.getElementById('answer-text');
+      answerText.textContent = config.yes_response || defaultConfig.yes_response;
+      answerText.style.opacity = '1';
+    }
+
+    function answerNo() {
+      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+      const answerText = document.getElementById('answer-text');
+      answerText.textContent = config.no_response || defaultConfig.no_response;
+      answerText.style.opacity = '1';
+    }
+
+    function updateContent() {
+      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+      
+      document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+      document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+      document.getElementById('welcome-description').textContent = config.welcome_description || defaultConfig.welcome_description;
+      document.getElementById('view-button').textContent = config.view_button_text || defaultConfig.view_button_text;
+      
+      document.getElementById('letters-beloved').textContent = config.beloved_name || defaultConfig.beloved_name;
+      document.getElementById('letters-page-title').textContent = config.letters_page_title || defaultConfig.letters_page_title;
+      
+      document.getElementById('seal1-text').textContent = (config.seal1_text || defaultConfig.seal1_text).substring(0, 6).toUpperCase();
+      document.getElementById('seal2-text').textContent = (config.seal2_text || defaultConfig.seal2_text).substring(0, 6).toUpperCase();
+      document.getElementById('seal3-text').textContent = (config.seal3_text || defaultConfig.seal3_text).substring(0, 6).toUpperCase();
+      
+      document.getElementById('letter1-label').textContent = config.letter1_label || defaultConfig.letter1_label;
+      document.getElementById('letter1-content').textContent = config.letter1_content || defaultConfig.letter1_content;
+      document.getElementById('letter2-label').textContent = config.letter2_label || defaultConfig.letter2_label;
+      document.getElementById('letter2-content').textContent = config.letter2_content || defaultConfig.letter2_content;
+      document.getElementById('letter3-label').textContent = config.letter3_label || defaultConfig.letter3_label;
+      document.getElementById('letter3-content').textContent = config.letter3_content || defaultConfig.letter3_content;
+      
+      document.getElementById('continue-button').textContent = config.continue_button_text || defaultConfig.continue_button_text;
+      
+      document.getElementById('final-greeting').textContent = config.final_greeting || defaultConfig.final_greeting;
+      document.getElementById('final-beloved').textContent = config.beloved_name || defaultConfig.beloved_name;
+      document.getElementById('final-question').textContent = config.final_question || defaultConfig.final_question;
+      document.getElementById('yes-button').textContent = config.yes_button_text || defaultConfig.yes_button_text;
+      document.getElementById('no-button').textContent = config.no_button_text || defaultConfig.no_button_text;
+      document.getElementById('closing-text').textContent = config.closing_text || defaultConfig.closing_text;
+      document.getElementById('final-signature').textContent = config.sender_name || defaultConfig.sender_name;
+      document.getElementById('return-button').textContent = config.return_button_text || defaultConfig.return_button_text;
+    }
+
+    async function onConfigChange(config) {
+      updateContent();
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['beloved_name', config.beloved_name || defaultConfig.beloved_name],
+        ['sender_name', config.sender_name || defaultConfig.sender_name],
+        ['main_title', config.main_title || defaultConfig.main_title],
+        ['subtitle', config.subtitle || defaultConfig.subtitle],
+        ['welcome_description', config.welcome_description || defaultConfig.welcome_description],
+        ['view_button_text', config.view_button_text || defaultConfig.view_button_text],
+        ['letters_page_title', config.letters_page_title || defaultConfig.letters_page_title],
+        ['seal1_text', config.seal1_text || defaultConfig.seal1_text],
+        ['letter1_label', config.letter1_label || defaultConfig.letter1_label],
+        ['letter1_content', config.letter1_content || defaultConfig.letter1_content],
+        ['seal2_text', config.seal2_text || defaultConfig.seal2_text],
+        ['letter2_label', config.letter2_label || defaultConfig.letter2_label],
+        ['letter2_content', config.letter2_content || defaultConfig.letter2_content],
+        ['seal3_text', config.seal3_text || defaultConfig.seal3_text],
+        ['letter3_label', config.letter3_label || defaultConfig.letter3_label],
+        ['letter3_content', config.letter3_content || defaultConfig.letter3_content],
+        ['continue_button_text', config.continue_button_text || defaultConfig.continue_button_text],
+        ['final_greeting', config.final_greeting || defaultConfig.final_greeting],
+        ['final_question', config.final_question || defaultConfig.final_question],
+        ['yes_button_text', config.yes_button_text || defaultConfig.yes_button_text],
+        ['no_button_text', config.no_button_text || defaultConfig.no_button_text],
+        ['yes_response', config.yes_response || defaultConfig.yes_response],
+        ['no_response', config.no_response || defaultConfig.no_response],
+        ['closing_text', config.closing_text || defaultConfig.closing_text],
+        ['return_button_text', config.return_button_text || defaultConfig.return_button_text]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: () => ({ recolorables: [], borderables: [], fontEditable: undefined, fontSizeable: undefined }),
+        mapToEditPanelValues
+      });
+    }
+
+    updateContent();
   </script>
-
-</body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c66cdce739168c6',t:'MTc2OTgzNzI4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
